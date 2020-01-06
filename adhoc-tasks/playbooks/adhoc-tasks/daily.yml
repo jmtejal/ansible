@@ -1,0 +1,21 @@
+- hosts: JMT
+  gather_facts: False
+
+  tasks:
+
+  - name: Check uptime
+    shell: "uptime"
+    register: uptime
+
+  - name: Uptime output
+    debug: msg={{ uptime.stdout_lines }}
+
+  - name: Check NTP
+    shell: "ntpq -p"
+    register: uptime
+
+  - name: NTP output
+    debug: msg={{ ntp.stdout_lines }}
+
+
+

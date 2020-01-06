@@ -1,0 +1,17 @@
+- hosts: all
+  gather_facts: True
+  sudo: yes
+  vars:
+    destdir: /var/tmp/scr
+
+  tasks:
+
+  - name: Capture timestamp
+    shell: date +"%Y%m%d%H%M%S"
+    register: current_date_time
+
+  - name: Run a specified script
+    script: "{{ my_scr }}" 
+
+  - name: Fetch the output file
+    fetch: src=/var/tmp/myscript.out dest=/var/tmp/myscript.out.{{ inventory_hostname }}.{{ current_date_time.stdout }}  flat=yes
